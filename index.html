@@ -22,7 +22,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
-        
+        html, body {
+    overflow-x: hidden;
+}
         body {
             font-family: 'Poppins', sans-serif;
             background-color: #f8fafc;
@@ -80,7 +82,7 @@
 
     </style>
 </head>
-<body class="antialiased">
+<body class="antialiased overflow-x-hidden">
     <!-- Barra de Navegação -->
    <nav class="bg-black text-white shadow-md sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -144,8 +146,8 @@
             </div>
             <div class="relative">
                  <img src="./logo-site-ofc.png" alt="Escritório moderno da ArlanCell com equipe atendendo clientes" class="rounded-lg shadow-xl border border-gold w-full md:w-6500px] h-auto mx-auto" />
-                <div class="absolute -bottom-6 -right-6 bg-gold text-black px-6 py-3 rounded-lg font-bold shadow-lg">
-                    +100 empresas atendidas com sucesso
+                <div class="absolute -bottom-6 -right-5 bg-gold text-black px-4 py-3 rounded-lg font-bold shadow-lg">
+                    +1000 clientes felizes com nossos produtos/serviços!
                 </div>
             </div>
         </div>
@@ -221,14 +223,14 @@
                 </div>
                 
                 <div class="bg-gray-900 p-8 rounded-lg">
-                    <form action="https://formsubmit.co/arlantecgames@gmail.com" method="POST">
+                    <form id="form-feedback" action="https://formsubmit.co/arlantecgames@gmail.com" method="POST">
     <input type="hidden" name="_captcha" value="false">
     <input type="hidden" name="_subject" value="Novo Feedback do Site!">
     <input type="hidden" name="nota" id="nota" value="0 estrelas">
 
     <div class="mb-6">
         <label for="nome" class="block text-gray-300 mb-2">Seu nome</label>
-        <input type="text" name="nome" required class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-1 focus:ring-gold text-white">
+        <input type="text" id="nome" name="nome" required class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-1 focus:ring-gold text-white">
     </div>
 
     <div class="mb-6">
@@ -244,11 +246,12 @@
 
     <div class="mb-6">
         <label for="comentario" class="block text-gray-300 mb-2">Comentário</label>
-        <textarea name="comentario" rows="4" required class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-1 focus:ring-gold text-white"></textarea>
+        <textarea id="comentario" name="comentario" rows="4" required class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-1 focus:ring-gold text-white"></textarea>
     </div>
 
     <button type="submit" class="btn-gold w-full py-3 rounded-md text-lg font-semibold">Enviar Feedback</button>
 </form>
+
                 </div>
             </div>
         </div>
@@ -426,26 +429,23 @@
          });
         // Form submission
         document.getElementById('form-feedback').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Validate rating
-            if(document.getElementById('rating').value === '0') {
-                alert('Por favor, dê uma avaliação clicando nas estrelas');
-                return;
-            }
-            
-            // Form data would be sent to server here
-            alert('Obrigado pelo seu feedback! Sua avaliação foi enviada com sucesso.');
-            this.reset();
-            
-            // Reset stars
-            document.querySelectorAll('.feedback-star').forEach(s => {
-                s.classList.remove('text-yellow-400');
-                s.classList.add('text-gray-400');
-                s.innerHTML = '<i class="far fa-star"></i>';
-            });
-            document.getElementById('rating').value = '0';
-        });
+    e.preventDefault();
+    
+    if(document.getElementById('nota').value === '0 estrelas') {
+        alert('Por favor, dê uma avaliação clicando nas estrelas');
+        return;
+    }
+
+    alert('Obrigado pelo seu feedback! Sua avaliação foi enviada com sucesso.');
+    this.reset();
+
+    document.querySelectorAll('.feedback-star').forEach(s => {
+        s.classList.remove('text-yellow-400');
+        s.classList.add('text-gray-400');
+        s.innerHTML = '<i class="far fa-star"></i>';
+    });
+    document.getElementById('nota').value = '0 estrelas';
+});
     </script>
 </body>
 </html>
