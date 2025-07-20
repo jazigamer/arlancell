@@ -26,13 +26,9 @@
     overflow-x: hidden;
 }
         body {
-  background-color: #000;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  font-family: 'Poppins', sans-serif;
-}
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8fafc;
+        }
         
         .hero-gradient {
             background: linear-gradient(135deg, #121212 0%, #000000 100%);
@@ -62,73 +58,6 @@
         .btn-gold:hover {
             background: linear-gradient(to right, #F5D085, #D4AF37);
         }
-
-        .carousel {
-  position: relative;
-  width: 600px;
-  height: 220px;
-  padding: 20px;
-  border-radius: 20px;
-  background: #111;
-  box-shadow: 0 0 30px #ffd70b50;
-  overflow: hidden;
-}
-
-.slide {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  padding: 20px;
-  transition: opacity 1s;
-}
-
-.slide.active {
-  opacity: 1;
-  position: relative;
-}
-
-.avatar {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 3px solid #ffd70b;
-}
-
-.content {
-  flex: 1;
-}
-
-.content h3 {
-  margin: 0;
-  font-weight: 600;
-}
-
-.content h3 span {
-  display: block;
-  font-size: 0.85rem;
-  color: #aaa;
-}
-
-.stars {
-  color: #ffd70b;
-  margin: 5px 0;
-}
-
-.content p {
-  font-size: 0.9rem;
-  color: #ccc;
-  max-width: 400px;
-}
-
-.icon {
-  margin-top: 10px;
-  font-size: 1.5rem;
-  color: #ffd70b;
-}
         @media (max-width: 640px) {
     #mobile-menu {
         flex-direction: column;
@@ -328,38 +257,6 @@
             </div>
         </div>
     </section>
-    <section class="carousel">
-  <div class="slide active">
-    <img src="avatar1.jpg" alt="Juliana" class="avatar">
-    <div class="content">
-      <h3>Juliana Silva <span>@juliana</span></h3>
-      <div class="stars">★★★★★</div>
-      <p>It's a very nice article, it's exactly what I'm looking for. I'm very satisfied, I will order from you again!</p>
-      <div class="icon">💬</div>
-    </div>
-  </div>
-
-  <div class="slide">
-    <img src="avatar2.jpg" alt="Marcos" class="avatar">
-    <div class="content">
-      <h3>Marcos Lima <span>@marcos</span></h3>
-      <div class="stars">★★★★★</div>
-      <p>Top demais, recomendo para todos. Voltarei a comprar com certeza.</p>
-      <div class="icon">💬</div>
-    </div>
-  </div>
-
-  <div class="slide">
-    <img src="avatar3.jpg" alt="Larissa" class="avatar">
-    <div class="content">
-      <h3>Larissa Souza <span>@larissa</span></h3>
-      <div class="stars">★★★★★</div>
-      <p>Ótimo serviço, atendimento excelente, superou minhas expectativas!</p>
-      <div class="icon">💬</div>
-    </div>
-  </div>
-</section>
-
 
     <!-- Seção Contato -->
     <section id="contato" class="py-16 bg-white">
@@ -550,22 +447,6 @@
     });
     document.getElementById('nota').value = '0 estrelas';
 });
-const slides = document.querySelectorAll(".slide");
-let current = 0;
-
-function showSlide(index) {
-  slides.forEach((slide, i) => {
-    slide.classList.toggle("active", i === index);
-  });
-}
-
-setInterval(() => {
-  current = (current + 1) % slides.length;
-  showSlide(current);
-}, 4000);
-
-showSlide(current);
-
     </script>
 </body>
 </html>
