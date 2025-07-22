@@ -229,17 +229,39 @@
             </div>
 
             <div class="feature-card bg-white rounded-xl overflow-hidden shadow-md p-8 gold-border">
-                <div class="text-gold text-4xl mb-6">
-                    <i class="fas fa-mug-hot"></i>
-                </div>
-                <img src="./img/garrafa-personalisada.png" alt="Garrafa térmica personalizada em ambiente moderno" class="rounded-lg mb-4 w-full h-48 object-cover" />
-                <h3 class="text-xl font-bold text-gray-900 mb-3">Garrafa Térmica Personalizada</h3>
-                <p class="text-gray-600 mb-6">Personalizamos garrafas térmicas exclusivas para você ou sua empresa. Estilo e qualidade em um só produto.</p>
-                <div class="flex justify-between items-center">
-                    <span class="text-gold font-bold">A partir de R$15</span>
-                    <a href="#contato" class="text-gold font-semibold inline-flex items-center">Encomendar <i class="fas fa-arrow-right ml-2"></i></a>
-                </div>
-            </div>
+    <div class="text-gold text-4xl mb-6">
+        <i class="fas fa-mug-hot"></i>
+    </div>
+    <img src="./img/garrafa-personalisada.png" alt="Garrafa térmica personalizada" class="rounded-lg mb-4 w-full h-48 object-cover" />
+    <h3 class="text-xl font-bold text-gray-900 mb-3">Garrafa Térmica Personalizada</h3>
+    <p class="text-gray-600 mb-4">Personalizamos garrafas térmicas exclusivas para você ou sua empresa.</p>
+    <div class="flex justify-between items-center mb-4">
+        <span class="text-gold font-bold">A partir de R$15</span>
+        <button onclick="toggleGarrafaInfo()" class="text-gold font-semibold inline-flex items-center hover:underline">
+            Ver Modelos <i class="fas fa-chevron-down ml-2"></i>
+        </button>
+    </div>
+    <div id="garrafa-info" class="hidden space-y-4">
+        <div class="grid grid-cols-2 gap-4">
+            <img src="./img/garrafas-personalisadas/WhatsApp Image 2025-07-22 at 17.00.59.jpeg" alt="Modelo 1" class="rounded-lg border" />
+            <img src="./img/garrafas-personalisadas/WhatsApp Image 2025-07-22 at 17.01.00.jpeg" alt="Modelo 2" class="rounded-lg border" />
+        </div>
+        <iframe src="https://www.instagram.com/stories/highlights/SEU_ID_DO_DESTAQUE/embed"
+        frameborder="0"
+        scrolling="no"
+        allowtransparency="true"
+        allowfullscreen
+        class="w-full h-[500px] rounded-lg">
+</iframe>
+        <div class="mt-4">
+            <video controls class="w-full rounded-lg shadow-lg">
+                <source src="./img/garrafas-personalisadas/WhatsApp Video 2025-07-22 at 17.10.38.mp4" type="video/mp4">
+                Seu navegador não suporta vídeo.
+            </video>
+        </div>
+    </div>
+</div>
+
         </div>
     </div>
 </section>
@@ -668,6 +690,12 @@ function resetInterval() {
     mostrarDepoimento(indexAtual);
   }, 5000);
 }
+//card garrafas personalisadas
+function toggleGarrafaInfo() {
+    const info = document.getElementById("garrafa-info");
+    info.classList.toggle("hidden");
+}
+
 
   </script>
 </body>
