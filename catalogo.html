@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Catálogo - ArlanCell</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Cor personalizada dourada */
+    .text-gold { color: #d4af37; }
+  </style>
+</head>
+<body class="bg-gray-100 text-gray-900">
+  <header class="bg-black text-white p-4 text-center font-bold text-xl">
+    Catálogo de Aparelhos - ArlanCell
+  </header>
+
+  <main class="max-w-6xl mx-auto p-4 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+
+    <!-- PRODUTO 1: Redmi Note 13 (Preto) -->
+    <section class="bg-white rounded shadow p-4 flex flex-col items-center">
+      <img id="img-prod1" src="https://via.placeholder.com/180x220?text=Redmi+Note+13+Preto" alt="Redmi Note 13 Preto" class="mb-4" />
+      <h2 class="font-bold text-lg mb-2">Redmi Note 13</h2>
+      <!-- Somente 1 cor para este produto -->
+      <p class="text-gold font-semibold text-lg mb-4" id="price-prod1">
+        <!-- Troque o preço aqui -->
+        R$ 1.799,00
+      </p>
+      <button class="bg-black text-white px-4 py-2 rounded hover:bg-gray-800 transition">Ver aparelhos disponíveis</button>
+    </section>
+
+    <!-- PRODUTO 2: Galaxy A5 5G (Azul Claro) -->
+    <section class="bg-white rounded shadow p-4 flex flex-col items-center">
+      <img id="img-prod2" src="https://via.placeholder.com/180x220?text=Galaxy+A5+5G+Azul" alt="Galaxy A5 5G Azul Claro" class="mb-4" />
+      <h2 class="font-bold text-lg mb-2">Galaxy A5 5G</h2>
+      <!-- Somente 1 cor -->
+      <p class="text-gold font-semibold text-lg mb-4" id="price-prod2">R$ 1.450,00</p>
+      <button class="bg-black text-white px-4 py-2 rounded hover:bg-gray-800 transition">Ver aparelhos disponíveis</button>
+    </section>
+
+    <!-- PRODUTO 3: Realme C75X (Pink) -->
+    <section class="bg-white rounded shadow p-4 flex flex-col items-center">
+      <img id="img-prod3" src="https://via.placeholder.com/180x220?text=Realme+C75X+Pink" alt="Realme C75X Pink" class="mb-4" />
+      <h2 class="font-bold text-lg mb-2">Realme C75X</h2>
+      <!-- Somente 1 cor -->
+      <p class="text-gold font-semibold text-lg mb-4" id="price-prod3">R$ 1.099,00</p>
+      <button class="bg-black text-white px-4 py-2 rounded hover:bg-gray-800 transition">Ver aparelhos disponíveis</button>
+    </section>
+
+    <!-- PRODUTO 4: Note 60X (Preto, Verde) -->
+    <section class="bg-white rounded shadow p-4 flex flex-col items-center">
+      <img id="img-prod4" src="https://via.placeholder.com/180x220?text=Note+60X+Preto" alt="Note 60X Preto" class="mb-4" />
+      <h2 class="font-bold text-lg mb-2">Note 60X</h2>
+
+      <!-- Seleção de cores -->
+      <div class="flex space-x-2 mb-2">
+        <button
+          class="w-6 h-6 rounded-full bg-black border-2 border-gray-300"
+          onclick="changeProduct(4,0)"
+          aria-label="Cor Preto"
+        ></button>
+        <button
+          class="w-6 h-6 rounded-full bg-green-600 border-2 border-gray-300"
+          onclick="changeProduct(4,1)"
+          aria-label="Cor Verde"
+        ></button>
+      </div>
+
+      <p class="text-gold font-semibold text-lg mb-4" id="price-prod4">R$ 1.299,00</p>
+      <button class="bg-black text-white px-4 py-2 rounded hover:bg-gray-800 transition">Ver aparelhos disponíveis</button>
+    </section>
+
+    <!-- PRODUTO 5: Realme C75 (Dourado) -->
+    <section class="bg-white rounded shadow p-4 flex flex-col items-center">
+      <img id="img-prod5" src="https://via.placeholder.com/180x220?text=Realme+C75+Dourado" alt="Realme C75 Dourado" class="mb-4" />
+      <h2 class="font-bold text-lg mb-2">Realme C75</h2>
+      <!-- 1 cor -->
+      <p class="text-gold font-semibold text-lg mb-4" id="price-prod5">R$ 1.049,00</p>
+      <button class="bg-black text-white px-4 py-2 rounded hover:bg-gray-800 transition">Ver aparelhos disponíveis</button>
+    </section>
+
+    <!-- PRODUTO 6: Redmi Note 14 (Preto) -->
+    <section class="bg-white rounded shadow p-4 flex flex-col items-center">
+      <img id="img-prod6" src="https://via.placeholder.com/180x220?text=Redmi+Note+14+Preto" alt="Redmi Note 14 Preto" class="mb-4" />
+      <h2 class="font-bold text-lg mb-2">Redmi Note 14</h2>
+      <!-- 1 cor -->
+      <p class="text-gold font-semibold text-lg mb-4" id="price-prod6">R$ 1.899,00</p>
+      <button class="bg-black text-white px-4 py-2 rounded hover:bg-gray-800 transition">Ver aparelhos disponíveis</button>
+    </section>
+
+    <!-- PRODUTO 7: Galaxy A15 (Preto) -->
+    <section class="bg-white rounded shadow p-4 flex flex-col items-center">
+      <img id="img-prod7" src="https://via.placeholder.com/180x220?text=Galaxy+A15+Preto" alt="Galaxy A15 Preto" class="mb-4" />
+      <h2 class="font-bold text-lg mb-2">Galaxy A15</h2>
+      <!-- 1 cor -->
+      <p class="text-gold font-semibold text-lg mb-4" id="price-prod7">R$ 1.199,00</p>
+      <button class="bg-black text-white px-4 py-2 rounded hover:bg-gray-800 transition">Ver aparelhos disponíveis</button>
+    </section>
+
+    <!-- PRODUTO 8: Redmi 12C (Lilás) -->
+    <section class="bg-white rounded shadow p-4 flex flex-col items-center">
+      <img id="img-prod8" src="https://via.placeholder.com/180x220?text=Redmi+12C+Lilas" alt="Redmi 12C Lilás" class="mb-4" />
+      <h2 class="font-bold text-lg mb-2">Redmi 12C</h2>
+      <!-- 1 cor -->
+      <p class="text-gold font-semibold text-lg mb-4" id="price-prod8">R$ 799,00</p>
+      <button class="bg-black text-white px-4 py-2 rounded hover:bg-gray-800 transition">Ver aparelhos disponíveis</button>
+    </section>
+
+    <!-- PRODUTO 9: iPhone 11 (Branco) - Seminovo -->
+    <section class="bg-white rounded shadow p-4 flex flex-col items-center">
+      <img id="img-prod9" src="https://via.placeholder.com/180x220?text=iPhone+11+Branco" alt="iPhone 11 Branco" class="mb-4" />
+      <h2 class="font-bold text-lg mb-2">iPhone 11 - Seminovo</h2>
+      <!-- 1 cor -->
+      <p class="text-gold font-semibold text-lg mb-4" id="price-prod9">R$ 2.899,00</p>
+      <button class="bg-black text-white px-4 py-2 rounded hover:bg-gray-800 transition">Ver aparelhos disponíveis</button>
+    </section>
+
+    <!-- PRODUTO 10: iPhone 12 (Branco) - Seminovo -->
+    <section class="bg-white rounded shadow p-4 flex flex-col items-center">
+      <img id="img-prod10" src="https://via.placeholder.com/180x220?text=iPhone+12+Branco" alt="iPhone 12 Branco" class="mb-4" />
+      <h2 class="font-bold text-lg mb-2">iPhone 12 - Seminovo</h2>
+      <!-- 1 cor -->
+      <p class="text-gold font-semibold text-lg mb-4" id="price-prod10">R$ 3.499,00</p>
+      <button class="bg-black text-white px-4 py-2 rounded hover:bg-gray-800 transition">Ver aparelhos disponíveis</button>
+    </section>
+
+  </main>
+
+  <script>
+    /*
+      Dados dos produtos com múltiplas cores e preços.
+      Para alterar imagens ou preços, basta editar as URLs e strings aqui.
+    */
+    const products = {
+      4: [ // Note 60X com 2 cores
+        {
+          img: "https://via.placeholder.com/180x220?text=Note+60X+Preto",
+          price: "R$ 1.299,00"
+        },
+        {
+          img: "https://via.placeholder.com/180x220?text=Note+60X+Verde",
+          price: "R$ 1.349,00"
+        }
+      ]
+      // Outros produtos tem só 1 cor e estão estáticos no HTML.
+      // Se quiser colocar mais produtos com cores, adicione aqui e
+      // crie a função de troca de imagem e preço similar ao exemplo abaixo.
+    };
+
+    /**
+     * Troca a imagem e o preço do produto com múltiplas cores.
+     * @param {number} prodId - Id do produto (ex: 4)
+     * @param {number} colorIndex - índice da cor selecionada (0, 1, 2...)
+     */
+    function changeProduct(prodId, colorIndex){
+      const imgEl = document.getElementById(`img-prod${prodId}`);
+      const priceEl = document.getElementById(`price-prod${prodId}`);
+
+      if(products[prodId] && products[prodId][colorIndex]){
+        imgEl.src = products[prodId][colorIndex].img;
+        imgEl.alt = `Produto ${prodId} Cor ${colorIndex + 1}`;
+        priceEl.textContent = products[prodId][colorIndex].price;
+      }
+    }
+  </script>
+</body>
+</html>
