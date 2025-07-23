@@ -4,16 +4,134 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Catálogo - ArlanCell</title>
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  />
+
+  <!-- Favicon -->
+  <link rel="icon" href="./logo-site.png" type="image/png" />
+
+  <!-- Font Google -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
+    rel="stylesheet"
+  />
   <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    /* Cor personalizada dourada */
-    .text-gold { color: #d4af37; }
+   <style>
+    body {
+      background-color: #000;
+      font-family: 'Poppins', sans-serif;
+      overflow-x: hidden;
+      color: #fff;
+    }
+
+    .hero-gradient {
+      background: linear-gradient(135deg, #121212 0%, #000000 100%);
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 25px -5px rgba(212, 175, 55, 0.3);
+    }
+
+    .gold-border {
+      border: 1px solid rgba(212, 175, 55, 0.3);
+    }
+
+    .btn-gold {
+      background: linear-gradient(to right, #d4af37, #f5d085);
+      color: #000;
+      font-weight: 600;
+      transition: background 0.3s ease;
+    }
+
+    .btn-gold:hover {
+      background: linear-gradient(to right, #f5d085, #d4af37);
+    }
+
+    /* Mobile menu */
+    #mobile-menu {
+      display: none;
+      flex-direction: column;
+      gap: 1rem;
+      background: #000;
+      padding: 1rem;
+      position: absolute;
+      top: 64px;
+      right: 0;
+      width: 100%;
+      z-index: 40;
+    }
+
+    #mobile-menu.active {
+      display: flex;
+    }
+
+    /* Feedback stars */
+    .feedback-star {
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+
+    .feedback-star:hover,
+    .feedback-star.active {
+      color: #ffd700;
+    }
   </style>
 </head>
-<body class="bg-gray-100 text-gray-900">
-  <header class="bg-black text-white p-4 text-center font-bold text-xl">
-    Catálogo de Aparelhos - ArlanCell
-  </header>
+<body class="antialiased">
+  <!-- Navbar -->
+  <nav class="bg-black text-white shadow-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-16 items-center">
+        <div class="flex items-center">
+          <img src="./logo-site-ofc.png" alt="Logo ArlanCell" class="h-10" />
+        </div>
+
+        <!-- Menu desktop -->
+        <div class="hidden sm:flex sm:space-x-8">
+          <a href="#inicio" class="border-b-2 border-gold px-1 pt-1 text-sm font-medium">Início</a>
+          <a href="#servicos" class="text-gray-300 hover:text-white px-1 pt-1 text-sm font-medium">Serviços</a>
+          <a href="#feedback" class="text-gray-300 hover:text-white px-1 pt-1 text-sm font-medium">Feedback</a>
+          <a href="#contato" class="text-gray-300 hover:text-white px-1 pt-1 text-sm font-medium">Contato</a>
+        </div>
+
+        <div class="hidden sm:flex sm:items-center">
+          <a
+            href="https://wa.me/5585982163973?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20os%20servi%C3%A7os%20da%20ArlanCell!"
+            class="btn-gold px-4 py-2 rounded-md text-sm font-medium"
+            >WhatsApp</a
+          >
+        </div>
+
+        <!-- Botão menu mobile -->
+        <div class="sm:hidden flex items-center">
+          <button
+            id="menu-btn"
+            class="p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-800 focus:outline-none"
+            aria-label="Abrir menu"
+          >
+            <i class="fas fa-bars text-xl"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Menu mobile -->
+    <div id="mobile-menu" class="">
+      <a href="#inicio" class="block text-white py-2">Início</a>
+      <a href="#servicos" class="block text-white py-2">Serviços</a>
+      <a href="#feedback" class="block text-white py-2">Feedback</a>
+      <a href="#contato" class="block text-white py-2">Contato</a>
+      <a
+        href="https://wa.me/5585982163973?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20os%20servi%C3%A7os%20da%20ArlanCell!"
+        class="btn-gold px-4 py-2 rounded-md text-sm font-medium mt-4 inline-block text-center"
+        >WhatsApp</a
+      >
+    </div>
+  </nav>
 
   <main class="max-w-6xl mx-auto p-4 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
 
