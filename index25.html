@@ -750,6 +750,54 @@ function toggleGarrafaInfo() {
     const info = document.getElementById("garrafa-info");
     info.classList.toggle("hidden");
 }
+//test cards do cll
+  function trocarEdge60(cor) {
+    const img = document.getElementById("img-edge60");
+    const preco = document.getElementById("preco-edge60");
+    const dados = {
+      azul: { img: "https://m.media-amazon.com/images/I/71ZnnnqR7CL._AC_SL1500_.jpg", preco: "R$ 3.149,00" },
+      preto: { img: "https://m.media-amazon.com/images/I/71jYH49tHxL._AC_SL1500_.jpg", preco: "R$ 3.199,00" },
+      verde: { img: "https://m.media-amazon.com/images/I/71XtWwP8gXL._AC_SL1500_.jpg", preco: "R$ 3.179,00" }
+    };
+    img.src = dados[cor].img;
+    preco.innerText = dados[cor].preco;
+  }
+
+  function trocarG35(cor) {
+    const img = document.getElementById("img-g35");
+    const preco = document.getElementById("preco-g35");
+    const dados = {
+      cinza: { img: "https://m.media-amazon.com/images/I/71A8qo+xR5L._AC_SL1500_.jpg", preco: "R$ 1.049,00" },
+      preto: { img: "https://m.media-amazon.com/images/I/81acQqXFbTL._AC_SL1500_.jpg", preco: "R$ 1.099,00" },
+      vermelho: { img: "https://m.media-amazon.com/images/I/71VmWTsGnBL._AC_SL1500_.jpg", preco: "R$ 1.129,00" }
+    };
+    img.src = dados[cor].img;
+    preco.innerText = dados[cor].preco;
+  }
+
+  function trocarEdge50(cor) {
+    const img = document.getElementById("img-edge50");
+    const preco = document.getElementById("preco-edge50");
+    const dados = {
+      cinza: { img: "https://m.media-amazon.com/images/I/51U-9uXOH0L._AC_SL1000_.jpg", preco: "R$ 2.249,10" },
+      bronze: { img: "https://m.media-amazon.com/images/I/71nRWb0wQZL._AC_SL1500_.jpg", preco: "R$ 2.299,00" },
+      branco: { img: "https://m.media-amazon.com/images/I/61UEH-JRJVL._AC_SL1500_.jpg", preco: "R$ 2.289,00" }
+    };
+    img.src = dados[cor].img;
+    preco.innerText = dados[cor].preco;
+  }
+
+  function trocarG15(cor) {
+    const img = document.getElementById("img-g15");
+    const preco = document.getElementById("preco-g15");
+    const dados = {
+      azul: { img: "https://m.media-amazon.com/images/I/71z8U7IUN3L._AC_SL1500_.jpg", preco: "R$ 679,15" },
+      rosa: { img: "https://m.media-amazon.com/images/I/71KyxcoUkjL._AC_SL1500_.jpg", preco: "R$ 699,00" },
+      cinza: { img: "https://m.media-amazon.com/images/I/61qJKt2t8DL._AC_SL1500_.jpg", preco: "R$ 689,00" }
+    };
+    img.src = dados[cor].img;
+    preco.innerText = dados[cor].preco;
+  }
 
 
   </script>
