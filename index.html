@@ -211,8 +211,10 @@
                 <p class="text-gray-600 mb-6">Trabalhamos com as melhores marcas do mercado e os últimos lançamentos de smartphones.</p>
                 <div class="flex justify-between items-center">
                     <span class="text-gold font-bold">Parcelamos em até 18x</span>
-                    <a href="#contato" class="text-gold font-semibold inline-flex items-center">Consultar <i class="fas fa-arrow-right ml-2"></i></a>
+                    <a href="./catalogo.html" class="text-gold font-semibold inline-flex items-center">Consultar <i class="fas fa-arrow-right ml-2"></i></a>
                 </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 p-6">
+</div>
             </div>
 
             <div class="feature-card bg-white rounded-xl overflow-hidden shadow-md p-8 gold-border">
@@ -245,10 +247,16 @@
         <div class="grid grid-cols-2 gap-4">
             <img src="./img/garrafas-personalisadas/WhatsApp Image 2025-07-22 at 17.00.59.jpeg" alt="Modelo 1" class="rounded-lg border" />
             <img src="./img/garrafas-personalisadas/WhatsApp Image 2025-07-22 at 17.01.00.jpeg" alt="Modelo 2" class="rounded-lg border" />
+             <img src="./img/garrafas-personalisadas/WhatsApp Image 2025-07-23 at 13.34.36 (1).jpeg" alt="Modelo 3" class="rounded-lg border" />
+              <img src="./img/garrafas-personalisadas/WhatsApp Image 2025-07-23 at 13.34.36.jpeg" alt="Modelo 4" class="rounded-lg border" />
         </div>
         <div class="mt-4">
             <video controls class="w-full rounded-lg shadow-lg">
                 <source src="./img/garrafas-personalisadas/WhatsApp Video 2025-07-22 at 17.10.38.mp4" type="video/mp4">
+                Seu navegador não suporta vídeo.
+            </video>
+            <video controls class="w-full rounded-lg shadow-lg">
+                <source src="./img/garrafas-personalisadas/WhatsApp Video 2025-07-23 at 14.17.42.mp4" type="video/mp4">
                 Seu navegador não suporta vídeo.
             </video>
         </div>
@@ -288,6 +296,14 @@
               type="text"
               id="nome"
               name="nome"
+              required
+              class="w-full px-4 py-3 mb-6 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-1 focus:ring-gold text-white"
+            />
+            <label for="aroba" class="block text-gray-300 mb-2 font-semibold">Seu @ do Instagram</label>
+            <input
+              type="text"
+              id="aroba"
+              name="@"
               required
               class="w-full px-4 py-3 mb-6 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-1 focus:ring-gold text-white"
             />
@@ -688,8 +704,6 @@ function toggleGarrafaInfo() {
     const info = document.getElementById("garrafa-info");
     info.classList.toggle("hidden");
 }
-
-
   </script>
 </body>
 </html>
