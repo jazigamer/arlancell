@@ -1,0 +1,19 @@
+﻿export const defaultCategories = [
+  { id: "celulares", label: "Celulares", icon: "📱" },
+  { id: "fones", label: "Fones", icon: "🎧" },
+  { id: "acessorios", label: "Acessórios", icon: "🔌" },
+  { id: "informatica", label: "Informática", icon: "💻" },
+];
+
+export const brands = ["Samsung", "Apple", "Xiaomi", "Motorola", "JBL", "Logitech", "Lenovo"];
+
+export const defaultProducts = [
+  { id: 1, name: "iPhone 15 Pro Max 256GB", category: "celulares", brand: "Apple", price: 8999.9, oldPrice: 9999.9, image: "https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=800", images: ["https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=800", "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=800", "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=800"], badge: "Premium", featured: true, stock: 8, freeShipping: true, description: "iPhone 15 Pro Max com chip A17 Pro, câmera 48MP e titânio.", specs: ["Tela 6.7 Super Retina XDR", "Chip A17 Pro", "256GB", "Câmera 48MP", "Titânio"] },
+  { id: 2, name: "Smartphone X Pro 256GB", category: "celulares", brand: "Samsung", price: 2499.9, oldPrice: 2899.9, image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=800", images: ["https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=800"], badge: "Oferta", featured: true, stock: 12, freeShipping: true, description: "Smartphone premium AMOLED 120Hz.", specs: ["AMOLED 120Hz", "256GB", "108MP"] },
+  { id: 3, name: "Fone Bluetooth ANC Premium", category: "fones", brand: "JBL", price: 299.9, oldPrice: 399.9, image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800", images: ["https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800"], badge: "Premium", featured: true, stock: 25, freeShipping: true, description: "ANC, 40h bateria.", specs: ["ANC", "40h", "Bluetooth 5.3"] },
+  { id: 4, name: "Carregador Turbo 65W GaN", category: "acessorios", brand: "Xiaomi", price: 129.9, oldPrice: 179.9, image: "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=800", images: ["https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=800"], badge: null, featured: true, stock: 3, freeShipping: false, description: "Carregador ultracompacto GaN.", specs: ["65W", "GaN"] },
+  { id: 5, name: "Notebook Ultra 16GB SSD 512GB", category: "informatica", brand: "Lenovo", price: 3899.9, oldPrice: 4499.9, image: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=800", images: ["https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=800"], badge: "Novo", featured: true, stock: 5, freeShipping: true, description: "Notebook i7 13ª, 16GB, SSD 512GB.", specs: ["i7 13ª", "16GB DDR5", "SSD 512GB"] },
+  { id: 6, name: "Smartwatch Fit Series 8", category: "acessorios", brand: "Apple", price: 449.9, oldPrice: 599.9, image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800", images: ["https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800"], badge: "Oferta", featured: false, stock: 18, freeShipping: true, description: "Monitore sua saúde.", specs: ["AMOLED", "GPS"] },
+  { id: 7, name: "Caixa de Som Portátil 40W", category: "acessorios", brand: "JBL", price: 349.9, oldPrice: 429.9, image: "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=800", images: ["https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=800"], badge: null, featured: false, stock: 2, freeShipping: true, description: "40W à prova d'água.", specs: ["40W", "IPX7"] },
+  { id: 8, name: "Fone Gamer RGB 7.1", category: "fones", brand: "Logitech", price: 259.9, oldPrice: 319.9, image: "https://images.unsplash.com/photo-1583394838336-acd977736f90?w=800", images: ["https://images.unsplash.com/photo-1583394838336-acd977736f90?w=800"], badge: "Premium", featured: false, stock: 15, freeShipping: false, description: "Som 7.1 virtual RGB.", specs: ["7.1", "RGB"] },
+];
