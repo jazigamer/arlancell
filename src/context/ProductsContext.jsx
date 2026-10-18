@@ -9,32 +9,28 @@ export function ProductsProvider({ children }) {
   const [categories, setCategories] = useState(defaultCategories);
   const [loading, setLoading] = useState(true);
 
-  // Buscar produtos do Supabase assim que o site abre
   async function fetchProducts() {
     setLoading(true);
     const { data, error } = await supabase.from('products').select('*').order('id', { ascending: false });
     if (error) {
-      console.error("Erro ao buscar produtos:", error);
-      setProducts(defaultProducts); // Se der erro, usa os de exemplo
+      console.error("Erro ao buscar:", error.message);
+      setProducts(defaultProducts);
     } else if (data.length === 0) {
-      setProducts(defaultProducts); // Se o banco estiver vazio, usa os de exemplo
+      setProducts(defaultProducts);
     } else {
-      // Mapeando os dados do banco para o formato do site
-      const formatted = data.map(p => ({
+      setProducts(data.map(p => ({
         ...p,
         oldPrice: p.old_price,
         freeShipping: p.free_shipping,
         priceGuarantee: p.price_guarantee,
         images: p.images || [p.image]
-      }));
-      setProducts(formatted);
+      })));
     }
     setLoading(false);
   }
 
   useEffect(() => { fetchProducts(); }, []);
 
-  // ADICIONAR PRODUTO NO SUPABASE
   async function add(p) {
     const payload = {
       name: p.name, category: p.category, brand: p.brand, price: Number(p.price),
@@ -42,16 +38,15 @@ export function ProductsProvider({ children }) {
       stock: Number(p.stock), free_shipping: p.freeShipping, featured: p.featured,
       price_guarantee: p.priceGuarantee || false, badge: p.badge, description: p.description, specs: p.specs
     };
+    
     const { data, error } = await supabase.from('products').insert([payload]).select();
-    if (!error) {
-      fetchProducts(); // Recarrega a lista
-      return data[0];
+    if (error) {
+      alert("Erro ao salvar no banco: \n" + error.message + "\n\nVerifique se as chaves do Supabase estão no Cloudflare.");
     } else {
-      alert("Erro ao salvar: " + error.message);
+      fetchProducts();
     }
   }
 
-  // EDITAR PRODUTO NO SUPABASE
   async function update(id, patch) {
     const payload = {
       name: patch.name, category: patch.category, brand: patch.brand, price: Number(patch.price),
@@ -60,14 +55,18 @@ export function ProductsProvider({ children }) {
       price_guarantee: patch.priceGuarantee || false, badge: patch.badge, description: patch.description, specs: patch.specs
     };
     const { error } = await supabase.from('products').update(payload).eq('id', id);
-    if (!error) fetchProducts();
-    else alert("Erro ao atualizar: " + error.message);
+    
+    if (error) {
+      alert("Erro ao atualizar no banco: \n" + error.message);
+    } else {
+      fetchProducts();
+    }
   }
 
-  // DELETAR PRODUTO
   async function remove(id) {
     const { error } = await supabase.from('products').delete().eq('id', id);
-    if (!error) fetchProducts();
+    if (error) alert("Erro ao excluir: " + error.message);
+    else fetchProducts();
   }
 
   return (
