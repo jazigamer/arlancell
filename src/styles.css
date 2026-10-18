@@ -542,3 +542,49 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   .logo-img { height: 50px; } /* Aumentei no celular também */
   .footer-logo-img { height: 60px; }
 }
+
+/* ============================================================
+   CORREÇÃO MOBILE (Imagens menores e layout ajustado)
+   ============================================================ */
+@media (max-width: 768px) {
+  /* Header */
+  .header-inner { height: 60px; gap: 10px; }
+  .logo-img { height: 40px; }
+  .header-search { display: none; }
+  .header-actions .header-action div { display: none; } /* Esconde o texto do carrinho no mobile */
+  
+  /* Banner Hero */
+  .hero-banner { padding: 30px 0; }
+  .hero-inner { grid-template-columns: 1fr; text-align: center; }
+  .hero-text h1 { font-size: 2rem; }
+  .hero-price strong { font-size: 1.8rem; }
+  .hero-image { display: none; } /* Esconde a foto gigante do banner no mobile */
+  
+  /* Categorias */
+  .categories-row { display: flex; overflow-x: auto; gap: 10px; padding-bottom: 10px; }
+  .cat-card { min-width: 100px; padding: 15px 10px; }
+  
+  /* Grid de Produtos (Cards) */
+  .grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .product-image { padding: 10px; } /* Diminui o espaço em volta da foto */
+  .product-image img { object-fit: contain; max-height: 140px; } /* Força a imagem a não estourar */
+  .product-body { padding: 12px; }
+  .product-title h3 { font-size: 0.85rem; line-height: 1.2; }
+  .price { font-size: 1.2rem; }
+  .btn-buy { padding: 8px; font-size: 0.8rem; }
+  
+  /* Página de detalhes */
+  .product-detail-grid { grid-template-columns: 1fr; }
+  .main-image-box { padding: 15px; }
+  .main-image-box img { max-height: 250px; object-fit: contain; }
+  .thumbnails { display: flex; overflow-x: auto; gap: 8px; }
+  .thumb { width: 60px; height: 60px; flex-shrink: 0; }
+  
+  /* Layout Admin */
+  .admin-layout { grid-template-columns: 1fr; }
+  .admin-side { position: static; height: auto; flex-direction: row; overflow-x: auto; padding: 12px; border-bottom: 1px solid #333; }
+  .admin-side nav { flex-direction: row; }
+  .admin-main { padding: 15px; }
+  .admin-table th, .admin-table td { padding: 8px; font-size: 0.8rem; }
+  .admin-thumb { width: 32px; height: 32px; }
+}

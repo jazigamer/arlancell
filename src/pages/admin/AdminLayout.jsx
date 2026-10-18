@@ -1,10 +1,24 @@
 ﻿import { NavLink, Outlet, Navigate, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { auth } from "../../services/auth.js";
 import { useCart } from "../../context/CartContext.jsx";
+
 export default function AdminLayout() {
   const nav = useNavigate();
   const { settings } = useCart();
-  if (!auth.isLogged()) return <Navigate to="/admin/login" replace />;
+  const [loading, setLoading] = useState(true);
+  const [isLogged, setIsLogged] = useState(false);
+
+  useEffect(() => {
+    auth.getSession().then(session => {
+      setIsLogged(!!session);
+      setLoading(false);
+    });
+  }, []);
+
+  if (loading) return <div style={{ padding: 50, textAlign: "center", color: "#fff", background: "#000", minHeight: "100vh" }}>Verificando acesso...</div>;
+  if (!isLogged) return <Navigate to="/admin/login" replace />;
+
   return (
     <div className="admin-layout">
       <aside className="admin-side">
@@ -20,7 +34,7 @@ export default function AdminLayout() {
           <hr />
           <a href="/" target="_blank" rel="noreferrer">🌐 Ver site</a>
         </nav>
-        <button className="btn-sair" onClick={() => { auth.logout(); nav("/admin/login"); }}>Sair</button>
+        <button className="btn-sair" onClick={async () => { await auth.logout(); nav("/admin/login"); }}>Sair</button>
       </aside>
       <main className="admin-main"><Outlet /></main>
     </div>

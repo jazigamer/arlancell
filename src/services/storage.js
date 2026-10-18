@@ -10,7 +10,7 @@ const defaultSettings = {
   email: "contato@arlancell.com.br",
   cupons: { ARLAN10: 0.10, BEMVINDO15: 0.15 },
   freteGratisAcima: 299,
-  senhaAdmin: "arlan2024",
+  
   bannerTitle: "iPhone 15 Pro Max",
   bannerSubtitle: "Mais potência. Mais possibilidades.",
   bannerPrice: "R$ 6.999,00",
@@ -66,6 +66,7 @@ export const storage = {
   },
   setSettings(s) { localStorage.setItem(KEY_SETTINGS, JSON.stringify(s)); },
 };
+
 
 
 

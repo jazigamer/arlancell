@@ -1,12 +1,16 @@
-﻿const KEY = "arlancell_admin_auth";
-import { storage } from "./storage.js";
+﻿import { supabase } from "./supabase.js";
 
 export const auth = {
-  isLogged() { return sessionStorage.getItem(KEY) === "1"; },
-  login(password) {
-    const { senhaAdmin } = storage.getSettings();
-    if (password === senhaAdmin) { sessionStorage.setItem(KEY, "1"); return true; }
-    return false;
+  async login(email, password) {
+    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+    if (error) throw error;
+    return data;
   },
-  logout() { sessionStorage.removeItem(KEY); },
+  async logout() {
+    await supabase.auth.signOut();
+  },
+  async getSession() {
+    const { data } = await supabase.auth.getSession();
+    return data.session;
+  }
 };
