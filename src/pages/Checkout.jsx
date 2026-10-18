@@ -1,14 +1,17 @@
-﻿import { useState } from "react";
+import { useState } from "react";
 import { useCart } from "../context/CartContext.jsx";
 import { useNavigate } from "react-router-dom";
 import { formatBRL } from "../utils/format.js";
 export default function Checkout() {
   const { items, total, finalizarPedido } = useCart();
   const nav = useNavigate();
+  const [sending, setSending] = useState(false);
   const [cliente, setCliente] = useState({ nome: "", telefone: "", email: "", endereco: "", obs: "" });
-  function submit(e) {
+  async function submit(e) {
     e.preventDefault();
-    finalizarPedido(cliente);
+    if (sending) return;
+    setSending(true);
+    await finalizarPedido(cliente);
     nav("/");
   }
   if (items.length === 0) return <section className="container section"><h1>Carrinho vazio</h1></section>;
@@ -25,7 +28,7 @@ export default function Checkout() {
           </div>
           <label>Endereço (se for entrega)<input value={cliente.endereco} onChange={(e) => setCliente({ ...cliente, endereco: e.target.value })} /></label>
           <label>Observações<textarea rows="2" value={cliente.obs} onChange={(e) => setCliente({ ...cliente, obs: e.target.value })} /></label>
-          <button type="submit" className="btn-primary big">Enviar pedido pelo WhatsApp</button>
+          <button type="submit" className="btn-primary big" disabled={sending}>{sending ? "Enviando..." : "Enviar pedido pelo WhatsApp"}</button>
         </form>
         <div className="admin-form">
           <h3>Resumo</h3>

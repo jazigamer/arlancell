@@ -1,23 +1,34 @@
-﻿import { NavLink, Outlet, Navigate, useNavigate } from "react-router-dom";
+import { NavLink, Outlet, Navigate, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { auth } from "../../services/auth.js";
-import { useCart } from "../../context/CartContext.jsx";
 
 export default function AdminLayout() {
   const nav = useNavigate();
-  const { settings } = useCart();
-  const [loading, setLoading] = useState(true);
-  const [isLogged, setIsLogged] = useState(false);
+  const [status, setStatus] = useState("loading"); // loading | out | denied | ok
 
   useEffect(() => {
-    auth.getSession().then(session => {
-      setIsLogged(!!session);
-      setLoading(false);
-    });
+    (async () => {
+      const session = await auth.getSession();
+      if (!session) return setStatus("out");
+      const ok = await auth.isAdmin();
+      setStatus(ok ? "ok" : "denied");
+    })();
   }, []);
 
-  if (loading) return <div style={{ padding: 50, textAlign: "center", color: "#fff", background: "#000", minHeight: "100vh" }}>Verificando acesso...</div>;
-  if (!isLogged) return <Navigate to="/admin/login" replace />;
+  const tela = { padding: 50, textAlign: "center", color: "#fff", background: "#000", minHeight: "100vh" };
+
+  if (status === "loading") return <div style={tela}>Verificando acesso...</div>;
+  if (status === "out") return <Navigate to="/admin/login" replace />;
+  if (status === "denied") {
+    return (
+      <div style={tela}>
+        <h2>Acesso negado</h2>
+        <p>Este usuário não está autorizado como administrador.</p>
+        <p style={{ opacity: 0.7 }}>Confira se o e-mail está na tabela <code>admins</code> do Supabase e se o setup.sql foi executado.</p>
+        <button className="btn-primary" onClick={async () => { await auth.logout(); nav("/admin/login"); }}>Sair</button>
+      </div>
+    );
+  }
 
   return (
     <div className="admin-layout">

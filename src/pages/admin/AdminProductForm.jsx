@@ -1,4 +1,4 @@
-﻿import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useProducts } from "../../context/ProductsContext.jsx";
 import { fileToDataURL } from "../../services/imageUpload.js";
@@ -52,8 +52,11 @@ export default function AdminProductForm() {
     });
   }
 
-  function submit(e) {
+  const [saving, setSaving] = useState(false);
+
+  async function submit(e) {
     e.preventDefault();
+    if (saving) return;
     if (form.images.length === 0) { alert("Adicione pelo menos uma foto!"); return; }
     const payload = {
       ...form,
@@ -62,8 +65,10 @@ export default function AdminProductForm() {
       image: form.images[0],
       specs: specsTxt.split("\n").map((s) => s.trim()).filter(Boolean),
     };
-    if (id) update(Number(id), payload); else add(payload);
-    nav("/admin/produtos");
+    setSaving(true);
+    const ok = id ? await update(Number(id), payload) : await add(payload);
+    setSaving(false);
+    if (ok) nav("/admin/produtos");
   }
 
   return (
@@ -135,7 +140,7 @@ export default function AdminProductForm() {
           <label style={{ color: 'var(--gold)', fontWeight: 'bold' }}><input type="checkbox" checked={form.priceGuarantee || false} onChange={(e) => set("priceGuarantee", e.target.checked)} /> 🏆 Garantia de Preço (Apenas para produtos caros)</label>
         </div>
         <div className="form-actions">
-          <button type="submit" className="btn-primary">💾 Salvar produto</button>
+          <button type="submit" className="btn-primary" disabled={saving}>{saving ? "Salvando..." : "💾 Salvar produto"}</button>
           <button type="button" className="btn-ghost dark" onClick={() => nav("/admin/produtos")}>Cancelar</button>
         </div>
       </form>

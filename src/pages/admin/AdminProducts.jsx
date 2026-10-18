@@ -1,9 +1,9 @@
-﻿import { useState, useMemo } from "react";
+import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { useProducts } from "../../context/ProductsContext.jsx";
 import { formatBRL } from "../../utils/format.js";
 export default function AdminProducts() {
-  const { products, remove, removeMany, categories } = useProducts();
+  const { products, remove, removeMany, categories, loadError } = useProducts();
   const [q, setQ] = useState("");
   const [cat, setCat] = useState("todos");
   const [selected, setSelected] = useState([]);
@@ -11,10 +11,10 @@ export default function AdminProducts() {
 
   function toggle(id) { setSelected((s) => s.includes(id) ? s.filter((x) => x !== id) : [...s, id]); }
   function toggleAll() { setSelected(selected.length === filtered.length ? [] : filtered.map((p) => p.id)); }
-  function excluirSelecionados() {
+  async function excluirSelecionados() {
     if (!confirm(`Excluir ${selected.length} produto(s)?`)) return;
-    removeMany(selected);
-    setSelected([]);
+    const ok = await removeMany(selected);
+    if (ok) setSelected([]);
   }
 
   return (
@@ -23,6 +23,8 @@ export default function AdminProducts() {
         <h1>Produtos ({filtered.length})</h1>
         <Link to="/admin/produtos/novo" className="btn-primary">+ Novo produto</Link>
       </div>
+
+      {loadError && <p className="erro">{loadError}</p>}
 
       <div className="admin-filters">
         <input placeholder="🔍 Buscar produto..." value={q} onChange={(e) => setQ(e.target.value)} />
