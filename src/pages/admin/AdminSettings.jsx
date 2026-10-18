@@ -60,6 +60,11 @@ export default function AdminSettings() {
           <label>WhatsApp<input value={form.whatsapp || ""} onChange={set("whatsapp")} /></label>
           <label>E-mail<input value={form.email || ""} onChange={set("email")} /></label>
         </div>
+        <div className="form-row">
+          <label>Endereço da loja (opcional)<input value={form.endereco || ""} onChange={set("endereco")} placeholder="Rua, número, bairro" /></label>
+          <label>Horário (opcional)<input value={form.horario || ""} onChange={set("horario")} placeholder="Seg a Sáb, 8h às 18h" /></label>
+        </div>
+        <label>Link do Instagram (opcional)<input value={form.instagram || ""} onChange={set("instagram")} placeholder="https://instagram.com/sualoja" /></label>
         <label>Frete grátis acima de (R$)<input type="number" value={form.freteGratisAcima ?? 0} onChange={(e) => setForm({ ...form, freteGratisAcima: Number(e.target.value) })} /></label>
 
         <h3>🎟️ Cupons</h3>

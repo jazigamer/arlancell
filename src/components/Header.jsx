@@ -1,13 +1,19 @@
-﻿import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { useCart } from "../context/CartContext.jsx";
+import { useProducts } from "../context/ProductsContext.jsx";
 import CartDrawer from "./CartDrawer.jsx";
 
 export default function Header() {
-  const { count, setOpen } = useCart();
+  const { count, setOpen, settings } = useCart();
+  const { categories } = useProducts();
   const [q, setQ] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
   const nav = useNavigate();
+  const loc = useLocation();
+  const activeCat = loc.pathname === "/catalogo" ? new URLSearchParams(loc.search).get("cat") : null;
+  const wa = `https://wa.me/${settings.whatsapp}?text=${encodeURIComponent("Olá! Vim pelo site e gostaria de atendimento.")}`;
+  const linkClass = (active) => (active ? "active" : "");
 
   return (
     <>
@@ -21,45 +27,41 @@ export default function Header() {
 
       <header className="header">
         <div className="container header-inner">
-          <Link to="/" className="logo">
-            <img src="/logo-full.png" alt="Arlancell" className="logo-img" />
+          <Link to="/" className="logo" onClick={() => setMenuOpen(false)}>
+            <img src="/logo-full.png" alt={settings.nomeLoja || "Arlancell"} className="logo-img" />
           </Link>
 
           <form className="header-search" onSubmit={(e) => { e.preventDefault(); nav(`/catalogo?q=${encodeURIComponent(q)}`); setMenuOpen(false); }}>
-            <input placeholder="Buscar produtos, marcas e categorias..." value={q} onChange={(e) => setQ(e.target.value)} />
-            <button type="submit">🔍</button>
+            <input aria-label="Buscar produtos" placeholder="Buscar produtos, marcas e categorias..." value={q} onChange={(e) => setQ(e.target.value)} />
+            <button type="submit" aria-label="Buscar">🔍</button>
           </form>
 
           <div className="header-actions">
-            <Link to="/admin" className="header-action">
-              <span className="icon">👤</span>
-              <div><small>Minha conta</small><strong>Entrar</strong></div>
-            </Link>
-            <button className="header-action cart" onClick={() => setOpen(true)}>
+            <a href={wa} target="_blank" rel="noreferrer" className="header-action">
+              <span className="icon">💬</span>
+              <div><small>Fale conosco</small><strong>WhatsApp</strong></div>
+            </a>
+            <button className="header-action cart" onClick={() => setOpen(true)} aria-label="Abrir carrinho">
               <span className="icon">🛒</span>
+              {count > 0 && <span className="cart-badge">{count}</span>}
               <div><small>Carrinho</small><strong>{count} item(ns)</strong></div>
             </button>
           </div>
-          
-          <button className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>☰</button>
+
+          <button className="hamburger" aria-label="Menu" onClick={() => setMenuOpen(!menuOpen)}>☰</button>
         </div>
       </header>
 
       <nav className={`nav-bar ${menuOpen ? "open" : ""}`}>
-        <div className="container nav-inner">
-          <button className="btn-todas-cat">☰ Todas as categorias</button>
-          <NavLink to="/catalogo?cat=celulares">Celulares</NavLink>
-          <NavLink to="/catalogo?cat=acessorios">Acessórios</NavLink>
-          <NavLink to="/catalogo?cat=informatica">Informática</NavLink>
-          <NavLink to="/catalogo?cat=eletronicos">Eletrônicos</NavLink>
-          <NavLink to="/catalogo?cat=smartwatch">Smartwatch</NavLink>
-          <NavLink to="/catalogo?cat=audio">Áudio</NavLink>
-          <NavLink to="/catalogo?cat=games">Games</NavLink>
-          <NavLink to="/assistencia" className="text-orange font-bold">🔧 Assistência Técnica</NavLink>
+        <div className="container nav-inner" onClick={() => setMenuOpen(false)}>
+          <Link to="/catalogo" className="btn-todas-cat">☰ Todos os produtos</Link>
+          {categories.map((c) => (
+            <Link key={c.id} to={`/catalogo?cat=${c.id}`} className={linkClass(activeCat === c.id)}>{c.label}</Link>
+          ))}
+          <Link to="/assistencia" className={`text-orange font-bold ${linkClass(loc.pathname === "/assistencia")}`}>🔧 Assistência Técnica</Link>
         </div>
       </nav>
       <CartDrawer />
     </>
   );
 }
-

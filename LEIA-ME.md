@@ -1,22 +1,22 @@
-# Correção do painel admin - Arlancell
+# Arlancell - pacote completo (v2)
 
-## Passo 1 - Banco (Supabase)
+Contém a correção do painel admin (Supabase) + o novo visual do site.
+
+## Passo 1 - Banco (Supabase) - só se ainda não fez
 1. Abra `supabase/setup.sql`, troque `SEU_EMAIL_AQUI` pelo e-mail do seu login do admin.
 2. Supabase -> SQL Editor -> New query -> cole tudo -> Run.
-3. (Opcional) Se a tabela de produtos estiver vazia e você quer os 8 produtos de exemplo: rode `supabase/seed-produtos.sql`.
-4. Supabase -> Authentication -> Sign In / Providers: desligue "Allow new users to sign up" (só você entra).
+3. (Opcional) `supabase/seed-produtos.sql` importa 8 produtos de exemplo se a tabela estiver vazia.
+4. Authentication -> desligue "Allow new users to sign up".
 
-## Passo 2 - Código (GitHub)
-1. Descompacte este ZIP.
-2. No GitHub: Add file -> Upload files -> arraste a pasta `src` (ela sobrescreve os arquivos).
-3. Pode apagar `src/services/storage.js` (não é mais usado).
-4. O Cloudflare faz o deploy sozinho.
+## Passo 2 - Código
+Copie para a pasta do projeto, substituindo os arquivos:
+- a pasta `src`
+- o arquivo `index.html`
+Depois: commit e push. O Cloudflare faz o deploy sozinho.
+(Pode apagar `src/services/storage.js`; não é mais usado.)
 
-## Passo 3 - Conferir no Cloudflare
-Em Settings -> Variables and Secrets, precisam existir:
-- VITE_SUPABASE_URL
-- VITE_SUPABASE_ANON_KEY
-(Depois de criar/alterar variáveis, faça um novo deploy.)
+## Passo 3 - Cloudflare
+Variáveis: VITE_SUPABASE_URL e VITE_SUPABASE_ANON_KEY.
 
-## Teste final
-Entre no /admin, edite um produto, mude o vídeo em Configurações, e abra o site numa aba anônima: as mudanças devem aparecer.
+## Depois de publicar
+No /admin -> Configurações: preencha banner, WhatsApp, e-mail, endereço, horário e Instagram.

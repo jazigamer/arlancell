@@ -1,4 +1,4 @@
-﻿import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useProducts } from "../context/ProductsContext.jsx";
 import { useCart } from "../context/CartContext.jsx";
@@ -13,12 +13,21 @@ export default function ProductDetail() {
   const [imgIdx, setImgIdx] = useState(0);
   const [cep, setCep] = useState("");
   const [freteMsg, setFreteMsg] = useState(null);
-  const [freteTipo, setFreteTipo] = useState(""); 
+  const [freteTipo, setFreteTipo] = useState("");
+
+  useEffect(() => {
+    if (product) document.title = `${product.name} | ${settings.nomeLoja || "Arlancell"}`;
+    window.scrollTo(0, 0);
+    return () => { document.title = "Arlancell | Celulares e Acessórios Premium"; };
+  }, [product?.id]);
 
   if (!product) return <div className="container section"><h1>Produto não encontrado</h1><Link to="/catalogo" className="btn-primary">Voltar</Link></div>;
 
   const discount = product.oldPrice ? Math.round(100 - (product.price / product.oldPrice) * 100) : 0;
   const imgs = product.images?.length ? product.images : [product.image];
+  const stock = Number(product.stock);
+  const esgotado = product.stock != null && stock <= 0;
+  const ultimas = !esgotado && product.stock != null && stock > 0 && stock <= 3;
 
   function calcFrete() {
     const num = cep.replace(/\D/g, "");
@@ -71,12 +80,14 @@ export default function ProductDetail() {
         <div className="product-info">
           {product.brand && <span className="brand-tag">{product.brand}</span>}
           <h1>{product.name}</h1>
-          <div className="rating">⭐⭐⭐⭐⭐ <span>(24 avaliações)</span></div>
           
           <div className="price-box">
             {product.oldPrice && <span className="old-price">{formatBRL(product.oldPrice)}</span>}
             <span className="current-price">{formatBRL(product.price)}</span>
             <span className="installments">💳 Parcelamos em até 21x no cartão</span>
+            {esgotado && <span className="stock-note out">Produto esgotado no momento. Chame no WhatsApp para encomendar.</span>}
+            {ultimas && <span className="stock-note low">🔥 Últimas {stock} unidades em estoque</span>}
+            {!esgotado && !ultimas && product.stock != null && <span className="stock-note ok">✅ Em estoque</span>}
           </div>
 
           {/* GARANTIA DE PREÇO (Aparece apenas se estiver marcado no Admin) */}
@@ -126,13 +137,19 @@ export default function ProductDetail() {
           </div>
 
           <div className="action-buttons">
-            <button className="btn-buy-large" onClick={() => addItem(product)}>
-              🛒 Adicionar ao Carrinho
+            <button className="btn-buy-large" disabled={esgotado} onClick={() => addItem(product)}>
+              {esgotado ? "Indisponível" : "🛒 Adicionar ao Carrinho"}
             </button>
             <a className="btn-whatsapp" href={`https://wa.me/${settings.whatsapp}?text=Tenho%20interesse%20no%20${encodeURIComponent(product.name)}`} target="_blank" rel="noreferrer">
-              💬 Comprar pelo WhatsApp
+              {esgotado ? "💬 Encomendar pelo WhatsApp" : "💬 Comprar pelo WhatsApp"}
             </a>
           </div>
+
+          <ul className="trust-row">
+            <li>🚚 Entrega no mesmo dia em Aracoiaba</li>
+            <li>💳 Até 21x no cartão</li>
+            <li>💬 Atendimento rápido no WhatsApp</li>
+          </ul>
         </div>
       </div>
     </section>

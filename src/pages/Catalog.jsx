@@ -1,10 +1,11 @@
-﻿import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useProducts } from "../context/ProductsContext.jsx";
 import ProductCard from "../components/ProductCard.jsx";
+import ProductSkeleton from "../components/ProductSkeleton.jsx";
 
 export default function Catalog() {
-  const { products, categories } = useProducts();
+  const { products, categories, loading } = useProducts();
   const [params] = useSearchParams();
   const [cat, setCat] = useState(params.get("cat") || "todos");
   const [q, setQ] = useState(params.get("q") || "");
@@ -55,9 +56,11 @@ export default function Catalog() {
         </div>
       </div>
 
-      <p className="results-count">{filtered.length} produto(s) encontrado(s)</p>
+      {!loading && <p className="results-count">{filtered.length} produto(s) encontrado(s)</p>}
       
-      {filtered.length === 0 ? (
+      {loading ? (
+        <ProductSkeleton count={8} />
+      ) : filtered.length === 0 ? (
         <p className="empty">😕 Nenhum produto encontrado.</p>
       ) : (
         <div className="grid">{filtered.map((p) => <ProductCard key={p.id} product={p} />)}</div>

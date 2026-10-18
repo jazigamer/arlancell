@@ -1,29 +1,50 @@
-﻿export default function Footer() {
+import { Link } from "react-router-dom";
+import { useCart } from "../context/CartContext.jsx";
+import { useProducts } from "../context/ProductsContext.jsx";
+
+export default function Footer() {
+  const { settings } = useCart();
+  const { categories } = useProducts();
+  const wa = `https://wa.me/${settings.whatsapp}`;
+
   return (
     <footer className="footer">
-      <div className="container footer-benefits">
-        <div className="f-benefit"><span>📍</span><div><strong>Entrega Local</strong><p>Grátis* e no mesmo dia em Aracoiaba</p></div></div>
-        <div className="f-benefit"><span>📦</span><div><strong>Entrega Rápida</strong><p>Para todo o Brasil via Correios</p></div></div>
-        <div className="f-benefit"><span>💳</span><div><strong>Pagamento Facilitado</strong><p>Cartão em até 21x ou à vista</p></div></div>
-        <div className="f-benefit"><span>🔧</span><div><strong>Assistência Técnica</strong><p>Conserto com garantia</p></div></div>
-      </div>
-      
-      <div className="container footer-main">
+      <div className="container footer-cols">
         <div className="f-brand">
-          <img src="/logo-full.png" alt="Arlancell" className="footer-logo-img" />
-          <p style={{ marginTop: '12px' }}>© {new Date().getFullYear()} Arlancell. Todos os direitos reservados.</p>
+          <img src="/logo-full.png" alt={settings.nomeLoja || "Arlancell"} className="footer-logo-img" />
+          <p className="f-about">Celulares, acessórios e assistência técnica com atendimento próximo e preço justo.</p>
         </div>
-        <div className="f-links">
-          <a href="#">Institucional</a>
-          <a href="#">Dúvidas Frequentes</a>
-          <a href="#">Política de Privacidade</a>
-          <a href="#">Termos de Uso</a>
+
+        <div className="f-col">
+          <h4>Loja</h4>
+          <Link to="/catalogo">Todos os produtos</Link>
+          {categories.slice(0, 5).map((c) => <Link key={c.id} to={`/catalogo?cat=${c.id}`}>{c.label}</Link>)}
+          <Link to="/assistencia">Assistência técnica</Link>
         </div>
-        <div className="f-socials">
-          <a href="#">📷</a><a href="#">📘</a><a href="#">▶️</a><a href="#">💬</a>
+
+        <div className="f-col">
+          <h4>Atendimento</h4>
+          <a href={wa} target="_blank" rel="noreferrer">💬 WhatsApp</a>
+          {settings.email && <a href={`mailto:${settings.email}`}>✉️ {settings.email}</a>}
+          {settings.horario && <span>🕒 {settings.horario}</span>}
+          {settings.endereco && <span>📍 {settings.endereco}</span>}
+          {settings.instagram && <a href={settings.instagram} target="_blank" rel="noreferrer">📷 Instagram</a>}
+        </div>
+
+        <div className="f-col">
+          <h4>Pagamento</h4>
+          <span>💳 Cartão em até 21x</span>
+          <span>💵 À vista (dinheiro ou Pix)</span>
+          <span>🚚 Entrega no mesmo dia em Aracoiaba</span>
+        </div>
+      </div>
+
+      <div className="footer-bottom">
+        <div className="container footer-bottom-inner">
+          <span>© {new Date().getFullYear()} {settings.nomeLoja || "Arlancell"}. Todos os direitos reservados.</span>
+          <Link to="/admin" className="f-admin">Área administrativa</Link>
         </div>
       </div>
     </footer>
   );
 }
-
